@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>インターンシップ 2026 | ムソー工業株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   MUSŌ KOGYO Internship 2026 Landing Page
+   編集するときは <!-- EDIT: ... --> を探してください
+───────────────────────────────────────────── */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:       #070d1a;
+  --bg2:      #0a1225;
+  --cyan:     #00c8f0;
+  --warm:     #D97048;
+  --white:    #ffffff;
+  --muted:    rgba(255,255,255,0.55);
+  --border:   rgba(255,255,255,0.08);
+  --grid:     rgba(0,180,230,0.03);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── グリッドテクスチャ ─── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─────────── NAV ─────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(7,13,26,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: "Space Mono", monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+.nav-logo span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  font-size: 9px;
+  color: var(--cyan);
+  margin-left: 2px;
+  vertical-align: middle;
+}
+.nav-cta {
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.nav-cta:hover { opacity: .8; }
+
+/* ─────────── TOP ACCENT LINE ─────────── */
+.top-line {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan) 0%, #0060c8 55%, var(--warm) 85%, transparent 100%);
+  z-index: 101;
+}
+
+/* ─────────── HERO ─────────── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 100px 5% 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,200,240,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  bottom: -60px; left: 5%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(217,112,72,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-ghost {
+  position: absolute;
+  bottom: -80px; right: -20px;
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: min(40vw, 400px);
+  line-height: 1;
+  color: rgba(255,255,255,0.016);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero-prelabel {
+  font-family: "DotGothic16", monospace;
+  font-size: clamp(12px, 1.2vw, 16px);
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-shadow: 0 0 14px rgba(0,200,240,0.5);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp .7s .1s ease forwards;
+}
+.hero-h1 {
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: clamp(52px, 8vw, 110px);
+  line-height: .95;
+  opacity: 0;
+  animation: fadeUp .7s .2s ease forwards;
+}
+.hero-h1 .cyan { color: var(--cyan); position: relative; display: inline-block; }
+.hero-h1 .cyan::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--cyan) 60%, var(--warm));
+}
+.hero-rule {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--warm), transparent);
+  margin: 32px 0;
+  opacity: 0;
+  animation: expandW .6s .5s ease forwards;
+  transform-origin: left;
+}
+.hero-sub {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp .7s .6s ease forwards;
+}
+.hero-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp .7s .75s ease forwards;
+}
+.tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tag-blue {
+  background: rgba(0,200,240,.08);
+  border: 1px solid rgba(0,200,240,.25);
+  color: rgba(255,255,255,.85);
+}
+.tag-warm {
+  background: rgba(217,112,72,.08);
+  border: 1px solid rgba(217,112,72,.3);
+  color: rgba(255,255,255,.85);
+}
+.tag-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tag-dot-blue { background: var(--cyan); }
+.tag-dot-warm { background: var(--warm); }
+
+/* ─── SCROLL INDICATOR ─── */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s ease forwards;
+}
+.scroll-hint span {
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+.scroll-arrow {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, var(--cyan), transparent);
+  animation: scrollPulse 1.5s ease infinite;
+}
+
+/* ─────────── SECTIONS COMMON ─────────── */
+section {
+  padding: 100px 5%;
+  position: relative;
+  z-index: 1;
+}
+.section-label {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-lead {
+  font-size: clamp(14px, 1.2vw, 17px);
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 640px;
+  margin-bottom: 60px;
+}
+.divider {
+  width: 100%; height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ─────────── FEATURES (3列カード) ─────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px 28px;
+  transition: border-color .3s, background .3s;
+}
+.feature-card:hover {
+  border-color: rgba(0,200,240,.3);
+  background: rgba(0,200,240,.04);
+}
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.feature-title {
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.feature-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ─────────── CURRICULUM (タイムライン) ─────────── */
+.curriculum-bg {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.day-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.day-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--cyan);
+}
+.day-card.warm::before { background: var(--warm); }
+.day-label {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.day-card.warm .day-label { color: var(--warm); }
+.day-title {
+  font-weight: 900;
+  font-size: 15px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.day-detail {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ─────────── AI/DIGITAL SECTION ─────────── */
+.ai-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .ai-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .ai-wrap > div:first-child { order: 2; }
+}
+.ai-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ai-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(0,200,240,.05);
+  border: 1px solid rgba(0,200,240,.12);
+  border-radius: 6px;
+}
+.ai-item-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ai-item-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.ai-item-text span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ─────────── APPLICATION SECTION ─────────── */
+.apply-bg {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.apply-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .apply-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+.apply-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.apply-table tr {
+  border-bottom: 1px solid var(--border);
+}
+.apply-table tr:first-child {
+  border-top: 1px solid var(--border);
+}
+.apply-table td {
+  padding: 16px 0;
+  font-size: 14px;
+  vertical-align: top;
+}
+.apply-table td:first-child {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  width: 30%;
+  padding-right: 20px;
+  padding-top: 18px;
+}
+.apply-table td:last-child {
+  font-weight: 700;
+  font-size: 15px;
+}
+.apply-table td:last-child small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── CTA BOX ─── */
+.cta-box {
+  background: rgba(0,200,240,.06);
+  border: 1px solid rgba(0,200,240,.2);
+  border-radius: 8px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.cta-title {
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.cta-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 14px 36px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: opacity .2s, transform .2s;
+  margin-bottom: 16px;
+}
+.cta-btn:hover { opacity: .85; transform: translateY(-2px); }
+.cta-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ─────────── FOOTER ─────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+.footer-logo {
+  font-family: "Space Mono", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.footer-logo span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  border: 1.5px solid var(--cyan);
+  border-radius: 50%;
+  font-size: 8px;
+  color: var(--cyan);
+  margin-left: 2px;
+  vertical-align: middle;
+}
+.footer-info {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  text-align: right;
+}
+
+/* ─────────── ANIMATIONS ─────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes expandW {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: .3; }
+  50%       { opacity: 1; }
+}
+
+/* ─────────── SCROLL REVEAL ─────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────── RESPONSIVE ─────────── */
+@media (max-width: 600px) {
+  nav { padding: 0 4%; }
+  section { padding: 72px 4%; }
+  .hero { padding: 90px 4% 72px; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-info { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <!-- EDIT: ロゴ文字 -->
+  <div class="nav-logo">MUS<span>Ō</span></div>
+  <!-- EDIT: エントリーボタンのリンク先 -->
+  <a href="#apply" class="nav-cta">エントリーする</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-ghost">東京</div>
+
+  <div class="hero-inner">
+    <!-- EDIT: インターンシップのラベル文言 -->
+    <p class="hero-prelabel">未来を作るインターンシップ 2026</p>
+
+    <!-- EDIT: メインキャッチコピー -->
+    <h1 class="hero-h1">
+      東京で、<br>
+      <span class="cyan">製造業。</span>
+    </h1>
+
+    <div class="hero-rule"></div>
+
+    <!-- EDIT: サブキャッチコピー -->
+    <p class="hero-sub">
+      日本の研究開発を、東京の現場で支える。<br>
+      ものづくりの最前線で、10日間。
+    </p>
+
+    <!-- EDIT: タグ（特徴ワード） -->
+    <div class="hero-tags">
+      <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>リアルな加工現場</span>
+      <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>AI・デジタル活用</span>
+      <span class="tag tag-warm"><span class="tag-dot tag-dot-warm"></span>研究開発から製品化まで</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── FEATURES ─── -->
+<section>
+  <div class="reveal">
+    <!-- EDIT: セクションラベル -->
+    <p class="section-label">Why Musō</p>
+    <!-- EDIT: セクションタイトル -->
+    <h2 class="section-title">このインターンが<br>他と違う理由</h2>
+    <!-- EDIT: セクションリード -->
+    <p class="section-lead">ムソー工業のインターンシップは「体験型」ではなく「実戦型」。現場の仕事をリアルに担います。</p>
+  </div>
+
+  <!-- EDIT: カード（アイコン・タイトル・説明文）3枚 -->
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏭</div>
+      <div class="feature-title">本番さながらの体験</div>
+      <div class="feature-desc">日ごとに内容が変わる、部署横断型のプログラム。加工・設計・営業・研究開発まで、ムソー工業の全体像を体験できます。</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI・デジタルの最前線</div>
+      <div class="feature-desc">当社ではAIやデジタルツールを積極的に活用中。インターン期間中も実際の業務でAIを使いながら、ものづくりの現場を体験します。</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏆</div>
+      <div class="feature-title">プロジェクト参加の機会</div>
+      <div class="feature-desc">TOKYO LIGHTS 授賞式トロフィー製作や、実際の製品製造プロジェクトに参加できる場合があります（実施可能な場合）。</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CURRICULUM ─── -->
+<section class="curriculum-bg">
+  <div class="reveal">
+    <p class="section-label">Program</p>
+    <h2 class="section-title">10日間のカリキュラム</h2>
+    <p class="section-lead">基礎から応用まで、段階的に深まる10日間。Day 5〜7は希望コースを選択できます。</p>
+  </div>
+
+  <!-- EDIT: 各DAYのタイトル・内容 -->
+  <div class="curriculum-grid">
+    <div class="day-card reveal">
+      <p class="day-label">DAY 1</p>
+      <p class="day-title">会社理解・全体把握</p>
+      <p class="day-detail">オリエンテーション、会社説明、安全教育、工場見学。振り返り・日報・面談。</p>
+    </div>
+    <div class="day-card reveal">
+      <p class="day-label">DAY 2</p>
+      <p class="day-title">加工①基礎</p>
+      <p class="day-detail">旋盤・フライスの基礎講義。材料の違いや加工現場見学。加工体験（段取り・刃工具など）。</p>
+    </div>
+    <div class="day-card reveal">
+      <p class="day-label">DAY 3</p>
+      <p class="day-title">加工②＋測定</p>
+      <p class="day-detail">加工条件比較、不良事例紹介、測定実習（ノギス・マイクロ等）、精度に関する流れの整理。</p>
+    </div>
+    <div class="day-card reveal">
+      <p class="day-label">DAY 4</p>
+      <p class="day-title">品質・研究との接続</p>
+      <p class="day-detail">試験片について学習、実際の試験片比較、表面粗さ・精度確認、精度に関するディスカッション。</p>
+    </div>
+    <div class="day-card warm reveal">
+      <p class="day-label">DAY 5–7</p>
+      <p class="day-title">希望別コース選択</p>
+      <p class="day-detail">
+        <strong>加工コース</strong>：段取り補助・加工条件比較・表面粗さ測定・加工品製作<br>
+        <strong>設計コース</strong>：図面の読み方・トレース・測定→図面化・ポンチ絵作成<br>
+        <strong>営業・管理コース</strong>：受注〜納品の流れ・生産管理システム操作・見積作成・外注先同行
+      </p>
+    </div>
+    <div class="day-card reveal">
+      <p class="day-label">DAY 8–9</p>
+      <p class="day-title">まとめ・アウトプット</p>
+      <p class="day-detail">インターン内容整理、ムソー工業の強み分析、プレゼン資料作成、中間発表・ブラッシュアップ。</p>
+    </div>
+    <div class="day-card reveal">
+      <p class="day-label">DAY 10</p>
+      <p class="day-title">発表・フィードバック</p>
+      <p class="day-detail">最終発表、質疑応答、フィードバック面談、キャリア相談。自分の適性や将来像を考える。</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── AI/DIGITAL ─── -->
+<section>
+  <div class="ai-wrap">
+    <div class="reveal">
+      <p class="section-label">Tech & Innovation</p>
+      <h2 class="section-title">AI・デジタル活用の現場</h2>
+      <p class="section-lead" style="margin-bottom:0">当社では、AIやデジタルツールをものづくりの現場に積極的に取り入れています。インターンシップを通じて、最先端のデジタルものづくりを体感してください。</p>
+    </div>
+    <!-- EDIT: AI活用の具体例（アイコン・タイトル・説明） -->
+    <div class="ai-items reveal">
+      <div class="ai-item">
+        <div class="ai-item-icon">📄</div>
+        <div class="ai-item-text">
+          <strong>資料作成</strong>
+          <span>AIを使った効率的なドキュメント作成・整理</span>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">🔍</div>
+        <div class="ai-item-text">
+          <strong>情報整理・分析</strong>
+          <span>製造データや品質情報のAI活用分析</span>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">🖥️</div>
+        <div class="ai-item-text">
+          <strong>プレゼン資料作成</strong>
+          <span>デジタルツールを活用した提案資料の制作</span>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">⚙️</div>
+        <div class="ai-item-text">
+          <strong>業務効率化</strong>
+          <span>現場作業とデジタルツールの融合</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── APPLICATION ─── -->
+<section class="apply-bg" id="apply">
+  <div class="apply-grid">
+    <div>
+      <div class="reveal">
+        <p class="section-label">Application</p>
+        <h2 class="section-title">応募要項</h2>
+      </div>
+
+      <!-- EDIT: 応募要項の各項目 -->
+      <table class="apply-table reveal">
+        <tr>
+          <td>対象</td>
+          <td>高等専門学校に在籍する学生<small>（学年・専攻は問いません）</small></td>
+        </tr>
+        <tr>
+          <td>期間</td>
+          <td>10日間<small>（日程はご相談のうえ調整）</small></td>
+        </tr>
+        <tr>
+          <td>場所</td>
+          <td>東京都大田区京浜島<small>（ムソー工業株式会社）</small></td>
+        </tr>
+        <tr>
+          <td>定員</td>
+          <td>先着順・若干名<small>（定員になり次第締め切ります）</small></td>
+        </tr>
+        <tr>
+          <td>費用</td>
+          <td>無料<small>（交通費・宿泊費は自己負担）</small></td>
+        </tr>
+        <tr>
+          <td>応募方法</td>
+          <td>下記フォームまたはメールにてご連絡ください</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- EDIT: CTAボックス（タイトル・説明・ボタン・注記） -->
+    <div class="cta-box reveal">
+      <p class="cta-title">エントリーはこちら</p>
+      <p class="cta-sub">
+        定員になり次第締め切ります。<br>お早めにご連絡ください。<br><br>
+        まずはお気軽にお問い合わせから。<br>日程・内容についてご相談できます。
+      </p>
+      <!-- EDIT: ボタンのリンク先（メールアドレス or Googleフォームなど） -->
+      <a href="mailto:recruit@muso-technologies.co.jp?subject=インターンシップ応募" class="cta-btn">
+        メールで問い合わせる
+      </a>
+      <p class="cta-note">
+        <!-- EDIT: メールアドレス -->
+        recruit@muso-technologies.co.jp<br>
+        または採用サイトのフォームからもご応募いただけます。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <!-- EDIT: フッターの会社情報 -->
+  <div class="footer-logo">MUS<span>Ō</span></div>
+  <div class="footer-info">
+    ムソー工業株式会社<br>
+    東京都大田区京浜島<br>
+    <a href="https://recruit.muso-technologies.co.jp/" style="color:var(--cyan);text-decoration:none;">recruit.muso-technologies.co.jp</a>
+  </div>
+</footer>
+
+<script>
+// ─── スクロール時のフェードイン ───
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("visible");
+      observer.unobserve(e.target);
+    }
+  }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
