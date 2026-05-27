@@ -31,8 +31,14 @@ body {
   background: var(--bg);
   color: var(--white);
   font-family: "Noto Sans JP", sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
   overflow-x: hidden;
+  padding-bottom: 72px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+p {
+  color: rgba(255,255,255,0.82);
 }
 
 /* ─── グリッドテクスチャ ─── */
@@ -90,7 +96,7 @@ nav {
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 100px 5% 80px;
+  padding: clamp(60px, 8vh, 100px) 5% 80px;
   position: relative;
   overflow: hidden;
 }
@@ -120,9 +126,43 @@ nav {
   white-space: nowrap;
 }
 .hero-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 60px);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 3%;
+}
+.hero-text {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+.hero-photo {
+  flex: 1 1 45%;
+  min-width: 0;
   position: relative;
-  z-index: 1;
-  max-width: 760px;
+}
+.hero-building-img {
+  width: 100%;
+  height: clamp(280px, 45vh, 540px);
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 1px rgba(0, 200, 240, 0.3),
+    0 0 40px rgba(0, 200, 240, 0.08);
+  mask-image: linear-gradient(to right, transparent 0%, black 15%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%);
+  display: block;
+}
+.hero-photo-caption {
+  font-size: clamp(10px, 0.85vw, 12px);
+  color: rgba(255,255,255,0.35);
+  text-align: right;
+  margin-top: 6px;
+  letter-spacing: 1px;
+  font-family: "Space Mono", monospace;
 }
 .hero-prelabel {
   font-family: "DotGothic16", monospace;
@@ -233,23 +273,23 @@ section {
 }
 .section-label {
   font-family: "Space Mono", monospace;
-  font-size: 10px;
+  font-size: clamp(11px, 1vw, 14px);
   color: var(--cyan);
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: clamp(10px, 1.5vh, 16px);
 }
 .section-title {
   font-family: "Dela Gothic One", sans-serif;
   font-size: clamp(28px, 4vw, 48px);
-  line-height: 1.15;
-  margin-bottom: 16px;
+  line-height: 1.25;
+  margin-bottom: clamp(12px, 2vh, 20px);
   font-weight: 400;
 }
 .section-lead {
   font-size: clamp(14px, 1.2vw, 17px);
-  color: var(--muted);
-  line-height: 1.8;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
   max-width: 640px;
   margin-bottom: 60px;
 }
@@ -307,7 +347,8 @@ section {
   background: rgba(255,255,255,.03);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 20px;
+  padding: clamp(18px, 2.5vh, 28px) clamp(16px, 2vw, 24px);
+  line-height: 1.0;
   position: relative;
   overflow: hidden;
 }
@@ -321,22 +362,245 @@ section {
 .day-card.warm::before { background: var(--warm); }
 .day-label {
   font-family: "Space Mono", monospace;
-  font-size: 10px;
+  font-size: clamp(10px, 0.9vw, 13px);
   color: var(--cyan);
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: clamp(6px, 1vh, 10px);
 }
 .day-card.warm .day-label { color: var(--warm); }
 .day-title {
   font-weight: 700;
-  font-size: 15px;
-  margin-bottom: 8px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  margin-bottom: clamp(8px, 1.2vh, 12px);
   line-height: 1.4;
+  color: #ffffff;
 }
 .day-detail {
-  font-size: 12px;
+  font-size: clamp(12px, 0.95vw, 14px);
+  color: rgba(255,255,255,0.68);
+  line-height: 1.75;
+}
+.day-card.partner {
+  background: rgba(217, 112, 72, 0.12);
+  border-color: rgba(217, 112, 72, 0.5);
+  position: relative;
+}
+.day-card.partner::before {
+  background: linear-gradient(90deg, var(--warm), rgba(217, 112, 72, 0.4));
+  height: 3px;
+}
+.day-card.partner .day-label { color: var(--warm); }
+.partner-badge {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(9px, 0.75vw, 11px);
+  background: var(--warm);
+  color: #1a0a00;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 8px;
+  border: none;
+}
+.partner-company {
+  color: var(--warm);
+  font-weight: 700;
+  text-decoration: none;
+}
+.partner-company:hover {
+  color: #e88a6a;
+}
+.partner-note {
+  background: rgba(217, 112, 72, 0.08);
+  border-left: 3px solid var(--warm);
+  border-radius: 0 8px 8px 0;
+  padding: clamp(16px, 2.5vh, 24px) clamp(20px, 3vw, 32px);
+  margin: clamp(20px, 3vh, 32px) 0;
+}
+.partner-label {
+  font-family: "Space Mono", monospace;
+  color: var(--warm);
+  font-size: clamp(10px, 0.85vw, 13px);
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.partner-text {
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.8;
+  color: rgba(255,255,255,0.82);
+}
+.curriculum-note {
+  font-size: clamp(11px, 0.9vw, 13px);
+  color: rgba(255,255,255,0.38);
+  text-align: center;
+  margin-top: clamp(16px, 2.5vh, 28px);
+  line-height: 1.7;
+  padding: 0 5%;
+}
+.curriculum-tabs-wrap {
+  margin: clamp(32px, 4vh, 48px) 0 clamp(20px, 3vh, 28px);
+}
+.curriculum-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+[role="tab"] {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(13px, 1.1vw, 16px);
+  padding: clamp(8px, 1.2vh, 12px) clamp(20px, 3vw, 36px);
+  border-radius: 6px 6px 0 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+}
+[role="tab"][aria-selected="true"] {
+  background: rgba(0, 200, 240, 0.15);
+  color: var(--cyan);
+  border-bottom: 2px solid var(--cyan);
+}
+[role="tab"]:hover:not([aria-selected="true"]) {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+}
+.curriculum-course-lead {
+  font-size: clamp(13px, 1.1vw, 15px);
   color: var(--muted);
   line-height: 1.7;
+}
+.curriculum-course-lead[hidden] { display: none; }
+.curriculum-panel[hidden] { display: none; }
+
+/* ─── MENTOR SECTION ─── */
+.mentor-section {
+  padding: clamp(48px, 8vh, 96px) 5%;
+}
+.mentor-card {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: flex-start;
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-left: 3px solid var(--cyan);
+  border-radius: 4px;
+  padding: clamp(24px, 4vh, 40px) clamp(24px, 4vw, 40px);
+  max-width: 860px;
+  margin: clamp(24px, 4vh, 40px) auto 0;
+}
+.mentor-avatar {
+  width: clamp(56px, 7vw, 80px);
+  height: clamp(56px, 7vw, 80px);
+  border-radius: 50%;
+  background: rgba(0, 200, 240, 0.15);
+  border: 1.5px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900;
+  color: var(--cyan);
+  flex-shrink: 0;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.mentor-body {
+  flex: 1;
+  min-width: 0;
+}
+.mentor-name {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+.mentor-external-badge {
+  display: inline-block;
+  font-size: clamp(9px, 0.75vw, 11px);
+  font-weight: 700;
+  background: rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.6);
+  border-radius: 3px;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.mentor-tag {
+  font-size: clamp(11px, 0.95vw, 13px);
+  color: var(--cyan);
+  font-family: "Space Mono", monospace;
+  letter-spacing: 1px;
+  margin-bottom: clamp(12px, 2vh, 18px);
+}
+.mentor-bio {
+  font-size: clamp(13px, 1.05vw, 15px);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
+  margin-bottom: clamp(14px, 2vh, 20px);
+}
+.mentor-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mentor-badge {
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 700;
+  color: var(--warm);
+  background: rgba(217, 112, 72, 0.12);
+  border: 0.5px solid rgba(217, 112, 72, 0.4);
+  border-radius: 3px;
+  padding: 3px 10px;
+  letter-spacing: 0.5px;
+}
+
+/* ─────────── BOTTOM BAR ─────────── */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5% 20px;
+}
+.days-badge {
+  pointer-events: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: "Dela Gothic One", sans-serif;
+  background: rgba(7, 13, 26, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  backdrop-filter: blur(8px);
+}
+.days-badge .days-num {
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--cyan);
+  line-height: 1;
+}
+.days-badge .days-sep {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--muted);
+  margin: 0 2px;
+}
+.days-badge .days-label {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-left: 4px;
 }
 
 /* ─────────── AI/DIGITAL SECTION ─────────── */
@@ -541,9 +805,30 @@ footer {
 @media (max-width: 600px) {
   nav { padding: 0 4%; }
   section { padding: 72px 4%; }
-  .hero { padding: 90px 4% 72px; }
+  .hero { padding: clamp(56px, 7vh, 88px) 4% 72px; }
   footer { flex-direction: column; text-align: center; }
   .footer-info { text-align: center; }
+  .bottom-bar { padding: 0 4% 16px; }
+  [role="tab"] { padding: 8px 14px; }
+  .mentor-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .mentor-badges { justify-content: center; }
+}
+@media (max-width: 640px) {
+  .hero-inner {
+    flex-direction: column;
+  }
+  .hero-photo {
+    width: 100%;
+  }
+  .hero-building-img {
+    height: clamp(180px, 40vw, 280px);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
 }
 </style>
 </head>
@@ -566,28 +851,35 @@ footer {
   <div class="hero-ghost">東京</div>
 
   <div class="hero-inner">
-    <!-- EDIT: インターンシップのラベル文言 -->
-    <p class="hero-prelabel">未来を作るインターンシップ 2026</p>
+    <div class="hero-text">
+      <!-- EDIT: インターンシップのラベル文言 -->
+      <p class="hero-prelabel">未来を作るインターンシップ 2026</p>
 
-    <!-- EDIT: メインキャッチコピー -->
-    <h1 class="hero-h1">
-      東京で、<br>
-      <span class="cyan">製造業。</span>
-    </h1>
+      <!-- EDIT: メインキャッチコピー -->
+      <h1 class="hero-h1">
+        東京で、<br>
+        <span class="cyan">製造業。</span>
+      </h1>
 
-    <div class="hero-rule"></div>
+      <div class="hero-rule"></div>
 
-    <!-- EDIT: サブキャッチコピー -->
-    <p class="hero-sub">
-      日本の研究開発を、東京の現場で支える。<br>
-      ものづくりの最前線で、10日間。
-    </p>
+      <!-- EDIT: サブキャッチコピー -->
+      <p class="hero-sub">
+        日本の研究開発を、東京の現場で支える。<br>
+        ものづくりの最前線で、5日間または10日間。
+      </p>
 
-    <!-- EDIT: タグ（特徴ワード） -->
-    <div class="hero-tags">
-      <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>リアルな加工現場</span>
-      <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>AI・デジタル活用</span>
-      <span class="tag tag-warm"><span class="tag-dot tag-dot-warm"></span>研究開発から製品化まで</span>
+      <!-- EDIT: タグ（特徴ワード） -->
+      <div class="hero-tags">
+        <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>リアルな加工現場</span>
+        <span class="tag tag-blue"><span class="tag-dot tag-dot-blue"></span>AI・デジタル活用</span>
+        <span class="tag tag-warm"><span class="tag-dot tag-dot-warm"></span>研究開発から製品化まで</span>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <img src="./P1110850.JPG" alt="ムソー工業 社屋外観" class="hero-building-img">
+      <div class="hero-photo-caption">東京都大田区 ムソー工業株式会社</div>
     </div>
   </div>
 
@@ -632,54 +924,151 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ─── CURRICULUM ─── -->
-<section class="curriculum-bg">
+<!-- ─── MENTOR ─── -->
+<section class="mentor-section">
   <div class="reveal">
-    <p class="section-label">Program</p>
-    <h2 class="section-title">10日間のカリキュラム</h2>
-    <p class="section-lead">基礎から応用まで、段階的に深まる10日間。Day 5〜7は希望コースを選択できます。</p>
+    <p class="section-label">External Mentor</p>
+    <h2 class="section-title">メンター紹介</h2>
   </div>
 
-  <!-- EDIT: 各DAYのタイトル・内容 -->
-  <div class="curriculum-grid">
-    <div class="day-card reveal">
-      <p class="day-label">DAY 1</p>
-      <p class="day-title">会社理解・全体把握</p>
-      <p class="day-detail">オリエンテーション、会社説明、安全教育、工場見学。振り返り・日報・面談。</p>
-    </div>
-    <div class="day-card reveal">
-      <p class="day-label">DAY 2</p>
-      <p class="day-title">加工①基礎</p>
-      <p class="day-detail">旋盤・フライスの基礎講義。材料の違いや加工現場見学。加工体験（段取り・刃工具など）。</p>
-    </div>
-    <div class="day-card reveal">
-      <p class="day-label">DAY 3</p>
-      <p class="day-title">加工②＋測定</p>
-      <p class="day-detail">加工条件比較、不良事例紹介、測定実習（ノギス・マイクロ等）、精度に関する流れの整理。</p>
-    </div>
-    <div class="day-card reveal">
-      <p class="day-label">DAY 4</p>
-      <p class="day-title">品質・研究との接続</p>
-      <p class="day-detail">試験片について学習、実際の試験片比較、表面粗さ・精度確認、精度に関するディスカッション。</p>
-    </div>
-    <div class="day-card warm reveal">
-      <p class="day-label">DAY 5–7</p>
-      <p class="day-title">希望別コース選択</p>
-      <p class="day-detail">
-        <strong>加工コース</strong>：段取り補助・加工条件比較・表面粗さ測定・加工品製作<br>
-        <strong>設計コース</strong>：図面の読み方・トレース・測定→図面化・ポンチ絵作成<br>
-        <strong>営業・管理コース</strong>：受注〜納品の流れ・生産管理システム操作・見積作成・外注先同行
+  <div class="mentor-card reveal">
+    <div class="mentor-avatar" aria-hidden="true">滝</div>
+    <div class="mentor-body">
+      <div class="mentor-name">滝口 圭太</div>
+      <span class="mentor-external-badge">外部サポーター</span>
+      <div class="mentor-tag">品川高専出身 ／ プロダクト開発者</div>
+      <p class="mentor-bio">
+        品川高専出身のプロダクト開発者。起業経験を持ち、大田区の町工場との連携や、
+        デジタル製造領域で知られる大型ベンチャーでの実務経験も有する。
+        今回のインターンシップでは、高専出身の先輩として、
+        技術を仕事にするリアル、製品開発の面白さ、ものづくりの現場で求められる視点を
+        伝えてくれるメンターとしてサポート予定。
       </p>
+      <div class="mentor-badges">
+        <span class="mentor-badge">品川高専OB</span>
+        <span class="mentor-badge">起業経験</span>
+        <span class="mentor-badge">大型ベンチャー</span>
+        <span class="mentor-badge">大田区ものづくり</span>
+      </div>
     </div>
-    <div class="day-card reveal">
-      <p class="day-label">DAY 8–9</p>
-      <p class="day-title">まとめ・アウトプット</p>
-      <p class="day-detail">インターン内容整理、ムソー工業の強み分析、プレゼン資料作成、中間発表・ブラッシュアップ。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CURRICULUM ─── -->
+<section class="curriculum-bg" id="curriculum">
+  <div class="reveal">
+    <p class="section-label">Program</p>
+    <h2 class="section-title">カリキュラム</h2>
+    <p class="section-lead">10日間と5日間の2コースから選択可能。どちらのコースにも、共同インターン先での1日体験を組み込んでいます。</p>
+  </div>
+
+  <div class="partner-note reveal">
+    <p class="partner-label">共同インターン制度</p>
+    <p class="partner-text">
+      ムソー工業のインターンには、大田区の協力会社2社（城南工業株式会社・株式会社北嶋絞製作所）での1日体験が含まれます。
+      自社だけでは見られない加工現場を体感することで、「作れない設計」ではなく「作れる設計」ができる技術者を育てます。
+    </p>
+  </div>
+  <p class="curriculum-note">※ カリキュラムの内容・実施日程・共同インターン先は、受け入れ状況により予告なく変更になる場合があります。</p>
+
+  <div class="curriculum-tabs-wrap reveal">
+    <div class="curriculum-tabs" role="tablist" aria-label="カリキュラムコース">
+      <button type="button" class="curriculum-tab" role="tab" id="tab-10d" aria-selected="true" aria-controls="panel-10d" tabindex="0">10日間コース</button>
+      <button type="button" class="curriculum-tab" role="tab" id="tab-5d" aria-selected="false" aria-controls="panel-5d" tabindex="-1">5日間コース</button>
     </div>
-    <div class="day-card reveal">
-      <p class="day-label">DAY 10</p>
-      <p class="day-title">発表・フィードバック</p>
-      <p class="day-detail">最終発表、質疑応答、フィードバック面談、キャリア相談。自分の適性や将来像を考える。</p>
+    <p class="curriculum-course-lead" id="course-lead-10d">基礎から応用まで段階的に深まる10日間。Day 7〜8は希望コースを選択できます。Day 5・6は共同インターン先での体験を組み込みます。</p>
+    <p class="curriculum-course-lead" id="course-lead-5d" hidden>短期集中型。基礎理解 → 大田区クラスター体験 → アウトプットの最短ルートで、ものづくりの本質に触れます。</p>
+  </div>
+
+  <!-- EDIT: 10日間コース 各DAYのタイトル・内容 -->
+  <div class="curriculum-panel" role="tabpanel" id="panel-10d" aria-labelledby="tab-10d">
+    <div class="curriculum-grid">
+      <div class="day-card reveal">
+        <p class="day-label">DAY 1</p>
+        <p class="day-title">会社理解・全体把握</p>
+        <p class="day-detail">オリエンテーション、会社説明、安全教育、工場見学。振り返り・日報・面談。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 2</p>
+        <p class="day-title">加工①基礎</p>
+        <p class="day-detail">旋盤・フライスの基礎講義。材料の違いや加工現場見学。加工体験（段取り・刃工具など）。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 3</p>
+        <p class="day-title">加工②＋測定</p>
+        <p class="day-detail">加工条件比較、不良事例紹介、測定実習（ノギス・マイクロ等）、精度に関する流れの整理。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 4</p>
+        <p class="day-title">品質・研究との接続</p>
+        <p class="day-detail">試験片について学習、実際の試験片比較、表面粗さ・精度確認、精度に関するディスカッション。</p>
+      </div>
+      <div class="day-card partner reveal">
+        <span class="partner-badge">共同インターン</span>
+        <p class="day-label">DAY 5</p>
+        <p class="day-title">共同インターン①｜<!-- EDIT: 詳細ページURL --> <span class="partner-company">城南工業株式会社</span></p>
+        <p class="day-detail">大田区の精密加工企業での1日体験。ムソーとは異なる加工技術と現場文化に触れる。</p>
+      </div>
+      <div class="day-card partner reveal">
+        <span class="partner-badge">共同インターン</span>
+        <p class="day-label">DAY 6</p>
+        <p class="day-title">共同インターン②｜<!-- EDIT: 詳細ページURL --> <span class="partner-company">株式会社北嶋絞製作所</span></p>
+        <p class="day-detail">へら絞り（メタルスピニング）の現場体験。職人技と現代製造業の接点を学ぶ。</p>
+      </div>
+      <div class="day-card warm reveal">
+        <p class="day-label">DAY 7–8</p>
+        <p class="day-title">希望別コース選択</p>
+        <p class="day-detail">
+          <strong>加工コース</strong>：段取り補助・加工条件比較・表面粗さ測定・加工品製作<br>
+          <strong>設計コース</strong>：図面の読み方・トレース・測定→図面化・ポンチ絵作成<br>
+          <strong>営業・管理コース</strong>：受注〜納品の流れ・生産管理システム操作・見積作成・外注先同行
+        </p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 9</p>
+        <p class="day-title">まとめ・アウトプット</p>
+        <p class="day-detail">インターン内容整理、ムソー工業の強み分析、プレゼン資料作成、中間発表・ブラッシュアップ。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 10</p>
+        <p class="day-title">発表・フィードバック</p>
+        <p class="day-detail">最終発表、質疑応答、フィードバック面談、キャリア相談。自分の適性や将来像を考える。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 5日間コース 各DAYのタイトル・内容 -->
+  <div class="curriculum-panel" role="tabpanel" id="panel-5d" aria-labelledby="tab-5d" hidden>
+    <div class="curriculum-grid">
+      <div class="day-card reveal">
+        <p class="day-label">DAY 1</p>
+        <p class="day-title">会社理解・全体把握</p>
+        <p class="day-detail">オリエンテーション、会社説明、安全教育、工場見学。ムソー工業の事業全体像を把握する。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 2</p>
+        <p class="day-title">加工・測定の基礎</p>
+        <p class="day-detail">旋盤・フライスの基礎講義、加工体験、測定実習（ノギス・マイクロ等）。10日間コースのDay2-3を1日に凝縮。</p>
+      </div>
+      <div class="day-card partner reveal">
+        <span class="partner-badge">共同インターン</span>
+        <p class="day-label">DAY 3</p>
+        <p class="day-title">共同インターン①｜<!-- EDIT: 詳細ページURL --> <span class="partner-company">城南工業株式会社</span></p>
+        <p class="day-detail">大田区の精密加工企業での1日体験。ムソーとは異なる加工技術と現場文化に触れる。</p>
+      </div>
+      <div class="day-card partner reveal">
+        <span class="partner-badge">共同インターン</span>
+        <p class="day-label">DAY 4</p>
+        <p class="day-title">共同インターン②｜<!-- EDIT: 詳細ページURL --> <span class="partner-company">株式会社北嶋絞製作所</span></p>
+        <p class="day-detail">へら絞り（メタルスピニング）の現場体験。職人技と現代製造業の接点を学ぶ。</p>
+      </div>
+      <div class="day-card reveal">
+        <p class="day-label">DAY 5</p>
+        <p class="day-title">まとめ・発表</p>
+        <p class="day-detail">インターン内容整理、ムソー工業の強み分析、プレゼン資料作成、最終発表、フィードバック面談。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -747,7 +1136,7 @@ footer {
         </tr>
         <tr>
           <td>期間</td>
-          <td>10日間<small>（日程はご相談のうえ調整）</small></td>
+          <td>5 または 10日間<small>（日程はご相談のうえ調整）</small></td>
         </tr>
         <tr>
           <td>場所</td>
@@ -788,6 +1177,16 @@ footer {
   </div>
 </section>
 
+<!-- ─── BOTTOM BAR ─── -->
+<div class="bottom-bar" aria-hidden="true">
+  <div class="days-badge" title="5日間または10日間コース">
+    <span class="days-num">5</span>
+    <span class="days-sep">/</span>
+    <span class="days-num">10</span>
+    <span class="days-label">日間</span>
+  </div>
+</div>
+
 <!-- ─── FOOTER ─── -->
 <footer>
   <!-- EDIT: フッターの会社情報 -->
@@ -801,16 +1200,79 @@ footer {
 
 <script>
 // ─── スクロール時のフェードイン ───
-const observer = new IntersectionObserver(
+const revealObserver = new IntersectionObserver(
   entries => entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add("visible");
-      observer.unobserve(e.target);
+      revealObserver.unobserve(e.target);
     }
   }),
   { threshold: 0.1 }
 );
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+function observeReveal(el) {
+  if (!el.classList.contains("visible")) revealObserver.observe(el);
+}
+document.querySelectorAll(".reveal").forEach(observeReveal);
+
+function revealInPanel(panel) {
+  if (!panel || panel.hidden) return;
+  panel.querySelectorAll(".reveal:not(.visible)").forEach(el => {
+    el.classList.add("visible");
+    revealObserver.unobserve(el);
+  });
+}
+
+// ─── カリキュラムタブ切替 ───
+(function initCurriculumTabs() {
+  const tabs = document.querySelectorAll(".curriculum-tab");
+  const panels = {
+    "tab-10d": document.getElementById("panel-10d"),
+    "tab-5d": document.getElementById("panel-5d"),
+  };
+  const leads = {
+    "tab-10d": document.getElementById("course-lead-10d"),
+    "tab-5d": document.getElementById("course-lead-5d"),
+  };
+
+  function activateTab(tab) {
+    const targetId = tab.getAttribute("aria-controls");
+    tabs.forEach(t => {
+      const selected = t === tab;
+      t.setAttribute("aria-selected", selected ? "true" : "false");
+      t.tabIndex = selected ? 0 : -1;
+    });
+    Object.entries(panels).forEach(([tabId, panel]) => {
+      const show = tabId === tab.id;
+      if (show) {
+        panel.hidden = false;
+        revealInPanel(panel);
+      } else {
+        panel.hidden = true;
+      }
+    });
+    Object.entries(leads).forEach(([tabId, lead]) => {
+      lead.hidden = tabId !== tab.id;
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => activateTab(tab));
+    tab.addEventListener("keydown", e => {
+      const list = Array.from(tabs);
+      const i = list.indexOf(tab);
+      let next = null;
+      if (e.key === "ArrowRight") next = list[(i + 1) % list.length];
+      else if (e.key === "ArrowLeft") next = list[(i - 1 + list.length) % list.length];
+      else if (e.key === "Home") next = list[0];
+      else if (e.key === "End") next = list[list.length - 1];
+      if (next) {
+        e.preventDefault();
+        activateTab(next);
+        next.focus();
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>
